@@ -90,8 +90,8 @@
             v-for="(guest, key) in guestList.values()"
             :key="key"
           >
-            <span class="text-zinc-300">{{guest}}</span>
-            <button type="button"><X class="size-4 text-zinc-400"></X></button>
+            <span class="text-zinc-300">{{guest.toString()}}</span>
+            <button type="button" @click="() => removeGuestFromList(guest.toString())"><X class="size-4 text-zinc-400"></X></button>
           </div>
         </div>
         <div class="w-full h-px bg-zinc-800"></div>
@@ -100,7 +100,7 @@
         >
           <div class="px-1 flex items-center flex-1 gap-2">
             <AtSign class="size-5 text-zinc-400" />
-            <input type="text" name="guestEmail" id="guestEmail" placeholder="Digite o e-mail do convidado" 
+            <input type="email" name="guestEmail" id="guestEmail" placeholder="Digite o e-mail do convidado" 
               class="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
               v-model="guestEmail"
               @keyup.enter="addGuestToList">
@@ -149,6 +149,10 @@ function addGuestToList() {
 
   guestList.value.add(guestEmail.value)
   guestEmail.value = ''
+}
+
+function removeGuestFromList(email: string) {
+  guestList.value.delete(email)
 }
 
 </script>
